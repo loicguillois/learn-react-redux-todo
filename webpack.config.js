@@ -1,6 +1,8 @@
 module.exports = {
   entry: [
-    './src/index.js'
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    './src/index.jsx' // Change the index file extension
   ],
   module: {
     loaders: [{
