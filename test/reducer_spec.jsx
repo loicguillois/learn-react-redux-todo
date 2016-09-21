@@ -29,6 +29,49 @@ describe('reducer', () => {
     }));
   });
 
+  it('handles SET_STATE with plain JS payload', () => {
+    const initialState = Map();
+    const action = {
+      type: 'SET_STATE',
+      state: {
+        todos: [
+          {id: 1, text: 'React', status: 'active'},
+          {id: 2, text: 'Redux', status: 'active'},
+          {id: 3, text: 'Immutable', status: 'completed'}
+        ]
+      }
+    };
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+        {id: 2, text: 'Redux', status: 'active'},
+        {id: 3, text: 'Immutable', status: 'completed'}
+      ]
+    }));
+  });
+
+  it('handles SET_STATE without initial state', () => {
+    const action = {
+      type: 'SET_STATE',
+      state: {
+        todos: [
+          {id: 1, text: 'React', status: 'active'},
+          {id: 2, text: 'Redux', status: 'active'},
+          {id: 3, text: 'Immutable', status: 'completed'}
+        ]
+      }
+    };
+    const nextState = reducer(undefined, action);
+    expect(nextState).to.equal(fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+        {id: 2, text: 'Redux', status: 'active'},
+        {id: 3, text: 'Immutable', status: 'completed'}
+      ]
+    }));
+  });
+
   it('handles TOGGLE_COMPLETE by changing the status from active to completed', () => {
     const initialState = fromJS({
       todos: [
@@ -92,6 +135,7 @@ describe('reducer', () => {
       filter: 'active'
     }));
   });
+
   it('handles EDIT_ITEM by setting editing to true', () => {
     const initialState = fromJS({
       todos: [
@@ -147,4 +191,59 @@ describe('reducer', () => {
     }));
   });
 
+  it('handles CLEAR_COMPLETED by removing all the completed items', () => {
+    const initialState = fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+        {id: 2, text: 'Redux', status: 'completed'},
+      ]
+    });
+    const action = {
+      type: 'CLEAR_COMPLETED'
+    }
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+      ]
+    }));
+  });
+
+  it('handles ADD_ITEM by adding the item', () => {
+    const initialState = fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'}
+      ]
+    });
+    const action = {
+      type: 'ADD_ITEM',
+      text: 'Redux'
+    }
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+        {id: 2, text: 'Redux', status: 'active'},
+      ]
+    }));
+  });
+
+  it('handles DELETE_ITEM by removing the item', () => {
+    const initialState = fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+        {id: 2, text: 'Redux', status: 'completed'},
+      ]
+    });
+    const action = {
+      type: 'DELETE_ITEM',
+      itemId: 2
+    }
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+      ]
+    }));
+  });
 });
