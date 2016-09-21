@@ -4,3 +4,9 @@ export function toggleComplete(itemId) {
     itemId
   }
 }
+export function changeFilter(filter) {
+  return {
+    type: 'CHANGE_FILTER',
+    filter
+  }
+}
