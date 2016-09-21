@@ -31,3 +31,22 @@ export function doneEditing(itemId, newText) {
     newText
   }
 }
+export function clearCompleted() {
+  return {
+    type: 'CLEAR_COMPLETED'
+  }
+}
+
+export function addItem(text) {
+  return {
+    type: 'ADD_ITEM',
+    text
+  }
+}
+
+export function deleteItem(itemId) {
+  return {
+    type: 'DELETE_ITEM',
+    itemId
+  }
+}
