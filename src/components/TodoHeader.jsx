@@ -15,7 +15,7 @@ export default React.createClass({
       <h1>todos</h1>
       <input className="new-todo"
              ref="addTodoInput"
-             autofocus={true}
+             autoFocus={true}
              autoComplete="off"
              placeholder="What needs to be done?"
              onKeyPress = {this._handleKeyPress} />
