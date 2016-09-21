@@ -3,7 +3,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import TodoItem from './TodoItem';
 
 export default class TodoList extends React.Component {
-  // Filters the items according to their status
   getItems() {
     if (this.props.todos) {
       return this.props.todos.filter(
@@ -12,13 +11,17 @@ export default class TodoList extends React.Component {
     }
     return [];
   }
+  isCompleted(item) {
+    return item.get('status') === 'completed';
+  }
   render() {
     return <section className="main">
       <ul className="todo-list">
-        // Only the filtered items are displayed
         {this.getItems().map(item =>
           <TodoItem key={item.get('text')}
-                    text={item.get('text')} />
+                    text={item.get('text')}
+                    isCompleted={this.isCompleted(item)}
+                    isEditing={item.get('editing')} />
         )}
       </ul>
     </section>
