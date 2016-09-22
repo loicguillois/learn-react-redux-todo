@@ -1,5 +1,6 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import Translate from 'react-translate-component';
 
 export default React.createClass({
   mixins: [PureRenderMixin],
@@ -11,14 +12,18 @@ export default React.createClass({
     }
   },
   render: function () {
+    var props = { component: 'input', type: 'search', name: 'q', scope: 'search_input', attributes: { placeholder: 'placeholder', title: 'tooltip' } };
+
     return <header className="header">
       <h1>todos</h1>
-      <input className="new-todo"
-             ref="addTodoInput"
-             autoFocus={true}
-             autoComplete="off"
-             placeholder="What needs to be done?"
-             onKeyPress = {this._handleKeyPress} />
+      <Translate component="input"
+                 className="new-todo"
+                 ref="addTodoInput"
+                 autoFocus={true}
+                 autoComplete="off"
+                 placeholder="{head.placeholder}"
+                 onKeyPress = {this._handleKeyPress}
+                 attributes={ { placeholder: 'head.placeholder'} } />
     </header>
   }
 });

@@ -3,6 +3,7 @@ import TodoList from './TodoList'
 import TodoHeader from './TodoHeader'
 import TodoTools from './TodoTools'
 import Footer from './Footer'
+import LocaleSwitcher from './LocaleSwitcher'
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
@@ -18,6 +19,7 @@ export class TodoApp extends React.Component {
   }
   render() {
     return <div>
+      <LocaleSwitcher />
       <section className="todoapp">
         <TodoHeader addItem={this.props.addItem}/>
         <TodoList {...this.props} />

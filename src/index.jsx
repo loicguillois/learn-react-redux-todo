@@ -4,6 +4,7 @@ import {List, Map} from 'immutable';
 import {compose, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducer';
+import translations from './translations';
 
 import {TodoAppContainer} from './components/TodoApp';
 

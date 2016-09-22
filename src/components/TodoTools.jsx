@@ -1,6 +1,7 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classNames from 'classnames';
+import Translate from 'react-translate-component';
 
 export default React.createClass({
   mixins: [PureRenderMixin],
@@ -16,35 +17,26 @@ export default React.createClass({
   render: function () {
     return <footer className="footer">
       <span className="todo-count">
-        <strong>{this.getNbItemsLeft()}</strong> items left
+        <strong>{this.getNbItemsLeft()}</strong> <Translate content="tools.itemLeft" />
       </span>
       <ul className="filters">
         <li>
-          <a href="#"
-             onClick={() => this.props.changeFilter('all')}
-             className={this.setSelectedClass('all')}>
-            All
-          </a>
+          <Translate component="a" content="tools.all" href="#"
+                     onClick={() => this.props.changeFilter('all')}
+                     className={this.setSelectedClass('all')} />
         </li>
         <li>
-          <a href="#"
-             onClick={() => this.props.changeFilter('active')}
-             className={this.setSelectedClass('active')}>
-            Active
-          </a>
+          <Translate component="a" content="tools.active" href="#"
+                     onClick={() => this.props.changeFilter('active')}
+                     className={this.setSelectedClass('active')} />
         </li>
         <li>
-          <a href="#"
-             onClick={() => this.props.changeFilter('completed')}
-             className={this.setSelectedClass('completed')}>
-            Completed
-          </a>
+          <Translate component="a" content="tools.completed" href="#"
+                     onClick={() => this.props.changeFilter('completed')}
+                     className={this.setSelectedClass('completed')} />
         </li>
       </ul>
-      <button className="clear-completed"
-              onClick={this.props.clearCompleted}>
-        Clear completed
-      </button>
+      <Translate value="en" component="button" content="tools.clearCompleted" className="clear-completed" onClick={this.props.clearCompleted} />
     </footer>
   }
 });
