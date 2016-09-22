@@ -4,7 +4,7 @@ import TodoHeader from '../../src/components/TodoHeader';
 import {expect} from 'chai';
 
 const {renderIntoDocument,
-  scryRenderedDOMComponentsWithTag,
+  scryRenderedDOMComponentsWithClass,
   Simulate} = TestUtils;
 
 describe('TodoHeader', () => {
@@ -15,7 +15,7 @@ describe('TodoHeader', () => {
       <TodoHeader addItem={addItem} />
     );
 
-    const input = component.refs.addTodoInput;
+    const input = scryRenderedDOMComponentsWithClass(component, 'new-todo')[0];
     input.value = 'This is a new item';
     Simulate.change(input);
     Simulate.keyPress(input, {key: "Enter", keyCode: 13, which: 13});

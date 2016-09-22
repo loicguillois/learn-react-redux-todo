@@ -5,20 +5,18 @@ import Translate from 'react-translate-component';
 export default React.createClass({
   mixins: [PureRenderMixin],
   _handleKeyPress: function(e) {
-    if (e.key === 'Enter' && this.refs.addTodoInput.value !== '') {
+    if (e.key === 'Enter' && e.currentTarget.value !== '') {
       return this.props.addItem(
-        this.refs.addTodoInput.value
+        e.currentTarget.value
       );
     }
   },
   render: function () {
-    var props = { component: 'input', type: 'search', name: 'q', scope: 'search_input', attributes: { placeholder: 'placeholder', title: 'tooltip' } };
-
     return <header className="header">
       <h1>todos</h1>
       <Translate component="input"
+                 type="text"
                  className="new-todo"
-                 ref="addTodoInput"
                  autoFocus={true}
                  autoComplete="off"
                  placeholder="{head.placeholder}"
